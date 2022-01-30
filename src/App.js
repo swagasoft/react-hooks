@@ -1,23 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
+import { useEffect, useRef, useState } from 'react';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code>  Basic react app
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+  const [name, setName] = useState('');
+  const renderCount = useRef(1);
+  const inputRef = useRef();
 
-        </a>
-      </header>
+
+  useEffect(() => {
+    renderCount.current = renderCount.current + 1;
+  });
+
+  function focus() {
+    inputRef.current.focus();
+  }
+
+  return (
+    <div >
+      <input value={name} onChange={(e) => setName(e.target.value)} /> <b />
+      <div>My name is {name} </div> <b />
+      <div> I render {renderCount.current} times </div>
+
+
+      <input ref={inputRef} value={name} onChange={(e) => setName(e.target.value)} /> <b />
+      <button onClick={focus}>Focus</button>
     </div>
   );
 }
